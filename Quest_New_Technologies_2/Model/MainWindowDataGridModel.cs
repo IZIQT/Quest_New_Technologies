@@ -7,6 +7,17 @@ namespace Quest_New_Technologies_2.Model
     {
         //        Date	Object A	Type A	Object B	Type B	Direction	Color	Intensity	LongitudeA	LongitudeA	LatitudeB	LongitudeB
 
+        private int id;
+        public int Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+
         private DateTime loc_Date;
         public DateTime Loc_Date
         {

@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:ViewModel="clr-namespace:Quest_New_Technologies_2.ViewModel"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
         mc:Ignorable="d"
         Title="Задача на должность C# разработчика по направлению Аналитическая обработка информации" Height="450" Width="800">
     <Window.DataContext>
@@ -30,36 +32,52 @@
                 <Button Margin="10 0 0 0" IsEnabled="{Binding EnableButtonExportCSV}" Command="{Binding ExportCSVFile}" ToolTip="Выгрузить из CVS файла">
                     <materialDesign:PackIcon  Kind="FileCsv"/>
                 </Button>
-                <Button Margin="10 0 0 0" IsEnabled="{Binding EnableButtonTestExportCSV}" Command="{Binding ExitExportCSVTestExit}" ToolTip="Тест прерывания асинхронной операции">
+                <Button Margin="10 0 0 0" IsEnabled="{Binding EnableButtonExportCSV}" Command="{Binding ExitExportCSVTestExit}" ToolTip="Тест прерывания асинхронной операции">
                     <materialDesign:PackIcon  Kind="FileDownloadOutline"/>
                 </Button>
                 <Button Command="{Binding ExitExportCSV}" Margin="10 0 0 0" Visibility="{Binding RunExportCSVVisiblity}">
                     <materialDesign:PackIcon Kind="Cancel"/>
                 </Button>
+
+                <Button Command="{Binding ExportDataToBase}" IsEnabled="{Binding EnableButtonExportCSV}" Margin="10 0 0 0" ToolTip="Записать в базу">
+                    <materialDesign:PackIcon Kind="Export"/>
+                </Button>
+                <Button Command="{Binding ImportDataToBase}" IsEnabled="{Binding EnableButtonExportCSV}" Margin="10 0 0 0" ToolTip="Получить из базы">
+                    <materialDesign:PackIcon Kind="Import"/>
+                </Button>
+                
                 <Grid >
                     <ProgressBar Margin="10 0 10 0" Maximum="{Binding ProgressBarMax}" Value="{Binding ProgressBarValue}" Height="20"/>
                     <TextBlock Text="{Binding ProgressBarValue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-
-
             </DockPanel>
         </materialDesign:ColorZone>
 
+        <!--<dxg:GridControl AutoGenerateColumns="AddNew" 
+                     EnableSmartColumnsGeneration="True" 
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Top">
+            <dxg:GridControl.View>
+                <dxg:TableView ShowTotalSummary="True"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>-->
+
         <DataGrid Grid.Row="3" Grid.Column="1" 
-                  ItemsSource="{Binding MainWindowDataGrid}" 
+                  ItemsSource="{Binding PhonesTable}" 
                   Grid.ColumnSpan="2"
-                  AutoGenerateColumns="False"
+                  
                   EnableRowVirtualization="True"
                   SelectionMode="Single"
                   SelectionUnit="FullRow"
                   IsSynchronizedWithCurrentItem="True"
                   Style="{StaticResource MaterialDesignDataGrid}">
+            <!--AutoGenerateColumns="False"-->
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.CellStyle>
-            <DataGrid.Columns>
+            <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Loc_Date, StringFormat={}{0:dd.MM.yyyy}}"/>
                 <DataGridTextColumn Header="ObjectA" Binding="{Binding Object_A}"/>
                 <DataGridTextColumn Header="TypeA" Binding="{Binding Type_A}"/>
@@ -72,7 +90,7 @@
                 <DataGridTextColumn Header="LongitudeA" Binding="{Binding LongitudeA}"/>
                 <DataGridTextColumn Header="LongitudeB" Binding="{Binding LongitudeB}"/>
                 <DataGridTextColumn Header="LatitudeB" Binding="{Binding LatitudeB}"/>
-            </DataGrid.Columns>
+            </DataGrid.Columns>-->
         </DataGrid>
     </Grid>
 </Window>
